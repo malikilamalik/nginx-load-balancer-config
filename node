@@ -1,0 +1,29 @@
+server {
+    listen ||WEB_APP_PORT||;
+    listen [::]:||WEB_APP_PORT||;
+
+    client_max_body_size 0;
+
+    server_name ||DOMAIN_LIST||;
+
+    location / {
+        proxy_pass                         ||PROXY_ADDRESS_PORT||;
+        proxy_ssl_session_reuse            off;
+        proxy_read_timeout                 999999w;
+
+        # Proxy headers
+        proxy_set_header Upgrade           $http_upgrade;
+        proxy_set_header Connection        'upgrade';
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host  $host;
+
+        ||ENABLE_PROXY_REDIRECT||proxy_redirect                     http://||WEB_APP_DOMAIN||/||APPLICATION_NAME||    http://||WEB_APP_DOMAIN||;
+        ||ENABLE_PROXY_REDIRECT||proxy_redirect                     https://||WEB_APP_DOMAIN||/||APPLICATION_NAME||   https://||WEB_APP_DOMAIN||;
+
+        ||ENABLE_WWW_PROXY_REDIRECT||proxy_redirect                     http://www.||WEB_APP_DOMAIN||/||APPLICATION_NAME||    http://www.||WEB_APP_DOMAIN||;
+        ||ENABLE_WWW_PROXY_REDIRECT||proxy_redirect                     https://www.||WEB_APP_DOMAIN||/||APPLICATION_NAME||   https://www.||WEB_APP_DOMAIN||;
+    }
+}
