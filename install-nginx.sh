@@ -12,7 +12,7 @@ mkdir -p $APPLICATION_DIR
 cd $APPLICATION_DIR || exit 2
 
 # Install NGINX
-sudo apt install -qq nginx
+sudo apt-get install -qq nginx
 sudo ufw allow 'Nginx Full'
 sudo systemctl restart nginx
 
