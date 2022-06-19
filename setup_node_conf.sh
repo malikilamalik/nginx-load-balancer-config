@@ -13,10 +13,10 @@ CFG_NAME=lb_${PAAS_SERVICE_ID--}_-
 
 curl -fsSL https://raw.githubusercontent.com/malikilamalik/nginx-load-balancer-config/main/node
 
-sed -i -e "s!||NODE_NAME||!$NODE_NAME!g" node_master
-sed -i -e "s!||NODE_PORT||!$NODE_PORT!g" node_master
+sed -i -e "s!||NODE_NAME||!$NODE_NAME!g" node
+sed -i -e "s!||NODE_PORT||!$NODE_PORT!g" node
 
-sudo cp node_master /etc/nginx/sites-available/$CFG_NAME
+sudo cp node /etc/nginx/sites-available/$CFG_NAME
 sudo ln -s /etc/nginx/sites-available/$CFG_NAME /etc/nginx/sites-enabled/
 
 rm -f reverse_proxy
