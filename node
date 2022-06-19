@@ -7,7 +7,7 @@ server {
     server_name ||NODE_NAME||;
 
     location / {
-        proxy_pass                         ||PROXY_ADDRESS_PORT||;
+        proxy_pass                         ||NODE_PORT||;
         proxy_ssl_session_reuse            off;
         proxy_read_timeout                 999999w;
 

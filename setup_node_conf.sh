@@ -11,7 +11,7 @@ trap 'failure ${LINENO} "$BASH_COMMAND"' ERR
 
 CFG_NAME=lb_${PAAS_SERVICE_ID--}_-
 
-curl -fsSL ${STATIC_URL}/ingress/node_master -o node_master
+curl -fsSL https://raw.githubusercontent.com/malikilamalik/nginx-load-balancer-config/main/node
 
 sed -i -e "s!||NODE_NAME||!$NODE_NAME!g" node_master
 sed -i -e "s!||NODE_PORT||!$NODE_PORT!g" node_master
