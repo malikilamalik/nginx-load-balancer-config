@@ -9,7 +9,7 @@ failure() {
 
 trap 'failure ${LINENO} "$BASH_COMMAND"' ERR
 
-CFG_NAME=lb_${PAAS_SERVICE_ID--}_-
+CFG_NAME=lb_${PAAS_SERVICE_ID--}_${NODE_MASTER_NAME--}_${NODE_MASTER_PORT--}
 
 
 if test -f "/etc/nginx/sites-enabled/default"; then

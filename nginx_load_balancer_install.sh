@@ -15,4 +15,3 @@ cd $APPLICATION_DIR || exit 2
 sudo apt-get install -qq nginx
 sudo ufw allow 'Nginx Full'
 sudo systemctl restart nginx
-

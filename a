@@ -1,0 +1,52 @@
+job "nginx-load-balancer-setup-node-{{.serviceNodeId}}" {
+    type = "batch"
+
+    datacenters = [ "dc1" ]
+
+    constraint {
+        attribute = "${node.unique.id}"
+        value     = "{{.nodeId}}"
+    }
+
+    reschedule {
+        attempts  = 0
+        unlimited = false
+    }
+
+    group "setup-nginx-node" {
+        count = 1
+
+        restart {
+            attempts = 0
+        }
+
+        task "setup" {
+            resources {
+                memory = 50
+            }
+            
+            artifact {
+                source = "{{.staticUrl}}/nginx/setup_node_master_conf.sh"
+                mode = "file"
+                destination = "local/setup_node_master_conf.sh"
+            }
+
+            env {
+                APPLICATION_DIR  = "/home/workspace/nginx-lb"
+                NODE_NAME        = "{{.nodeName}}"
+                NODE_PORT        = "{{.nodePort}}"
+                PAAS_SERVICE_ID  = "{{.serviceNodeId}}"
+            }
+
+            driver = "raw_exec"
+            
+            config {
+                command = "/usr/bin/bash"
+                args = [
+                    "-c",
+                    "chmod +x ${NOMAD_TASK_DIR}/setup_node_master_conf.sh  && mkdir -p ${env["APPLICATION_DIR"]} && cp ${NOMAD_TASK_DIR}/setup_node_master_conf.sh ${env["APPLICATION_DIR"]}/setup_node_master_conf.sh && ${env["APPLICATION_DIR"]}/setup_node_master_conf.sh"
+                ]
+            }
+        }
+    }
+}
