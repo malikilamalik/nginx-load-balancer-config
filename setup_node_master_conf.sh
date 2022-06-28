@@ -21,7 +21,7 @@ NODE_HOST=""
 IFS=';' read -ra NODE <<< "$NODE_INFO"
 for n in "${NODE[@]}"; do
     IFS=',' read -ra NAME <<< "$n"
-    NODE_HOST+="\tserver ${NAME[0]}:${NAME[1]}\n"
+    NODE_HOST+="\tserver ${NAME[0]}:${NAME[1]};\n"
 done
 
 sed -i -e "s!||NODE_HOST||!$NODE_HOST!g" node_master
