@@ -24,7 +24,7 @@ for n in "${NODE[@]}"; do
     NODE_HOST+="\tserver ${NAME[0]}:${NAME[1]}\n"
 done
 
-sed -i -e "s!||SERVER_HOST||!$NODE_HOST!g" node_master
+sed -i -e "s!||NODE_HOST||!$NODE_HOST!g" node_master
 sed -i -e "s!||NODE_MASTER_NAME||!$NODE_MASTER_NAME!g" node_master
 sed -i -e "s!||NODE_MASTER_PORT||!$NODE_MASTER_PORT!g" node_master
 
