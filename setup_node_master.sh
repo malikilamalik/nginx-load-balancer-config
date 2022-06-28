@@ -31,6 +31,6 @@ sed -i -e "s!||NODE_MASTER_PORT||!$NODE_MASTER_PORT!g" node_master
 sudo cp node_master /etc/nginx/sites-available/$CFG_NAME
 sudo ln -s /etc/nginx/sites-available/$CFG_NAME /etc/nginx/sites-enabled/
 
-rm -f reverse_proxy
+rm -f node_master
 
 sudo nginx -t && sudo nginx -s reload
