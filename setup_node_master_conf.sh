@@ -11,8 +11,8 @@ trap 'failure ${LINENO} "$BASH_COMMAND"' ERR
 
 CFG_NAME=lb_${PAAS_SERVICE_ID--}_${NODE_MASTER_NAME--}_${NODE_MASTER_PORT--}
 
-curl -fsSL ${STATIC_URL}/nginx-lb/node_master -o node_master
-curl -fsSL ${STATIC_URL}/nginx-lb/delete_current_conf.sh -o delete_current_conf.sh
+curl -fsSL https://raw.githubusercontent.com/malikilamalik/nginx-load-balancer-config/main/node_master -o node_master
+curl -fsSL https://raw.githubusercontent.com/malikilamalik/nginx-load-balancer-config/main/delete_current_conf.sh
 
 sudo bash delete_current_conf.sh
 
